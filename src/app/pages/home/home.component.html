@@ -1,0 +1,45 @@
+
+
+  <form *ngIf="currentStep.type === 'home'" class="w-100 h-100 flex-col">
+
+    <div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input [(ngModel)]="patient.name" name="name" type="text" class="form-control" id="name">
+      </div>
+      <div class="mb-3">
+        <label for="weight" class="form-label">Peso (Kg)</label>
+        <input [(ngModel)]="patient.weight" name="weight"  type="number" class="form-control" id="weight">
+      </div>
+      <button (click)="addPatient(); nextStep('main-options')" class="btn btn-primary" [disabled]="!patient.weight">Siguiente</button>
+    </div>
+  </form>
+
+  <div *ngIf="currentStep.type === 'options'" class="w-100 h-100 flex-col">
+
+    <h2 *ngIf="currentStep.label">{{currentStep.label}}</h2>
+
+    <div class="flex-col">
+
+      <button
+      *ngFor="let opt of currentStep.options"
+      (click)="nextStep(opt.key)"
+      class="btn btn-primary my-3 w-100"
+      [disabled]="opt.disabled"
+      >{{opt.label}}
+    </button>
+    </div>
+
+  </div>
+
+  <div *ngIf="currentStep.type === 'result'" class="w-100 h-100 flex-col">
+
+    <h2 *ngIf="currentStep.label">{{currentStep.label}}</h2>
+
+    <p class="result-text"> Diluir {{(compData.comp * patient.weight) >  compData.compMax ?  compData.compMax : compData.comp * patient.weight | number: '1.0-2' }} ml
+      <span *ngIf="(compData.comp * patient.weight) >  compData.compMax">(max)</span> de {{currentStep.label}}
+      en {{compData.sf * patient.weight | number: '1.0-2'}} ml de solucion fisiologica a pasar
+      en {{compData.goteo.min * patient.weight | number: '1.2-2'}}-{{compData.goteo.max * patient.weight | number: '1.0-2'}} ml/hs
+    </p>
+  </div>
+

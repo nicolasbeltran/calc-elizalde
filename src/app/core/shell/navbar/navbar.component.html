@@ -1,0 +1,15 @@
+<nav class="navbar navbar-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img (click)="goHome()" src="/assets/elizalde-logo.png" alt="" width="50" height="50">
+      <span class="ml-3 d-inline-block">Calculadora Elizalde</span>
+    </a>
+  </div>
+</nav>
+<nav *ngIf="patient?.weight" class="navbar navbar-light bg-dark">
+  <div class="container-fluid">
+    <span class="navbar-text text-light">
+      {{patient.name}} - {{patient.weight}} Kg
+    </span>
+  </div>
+</nav>

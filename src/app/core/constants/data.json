@@ -1,0 +1,12 @@
+[
+  {
+    "name": "difenil",
+    "comp": 0.4,
+    "compMax": 12,
+    "sf": 2,
+    "goteo": {
+      "min": 1.2,
+      "max": 3.6
+    }
+  }
+]
