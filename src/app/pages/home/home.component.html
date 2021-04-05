@@ -39,7 +39,7 @@
     <p class="result-text"> Diluir {{(compData.comp * patient.weight) >  compData.compMax ?  compData.compMax : compData.comp * patient.weight | number: '1.0-2' }} ml
       <span *ngIf="(compData.comp * patient.weight) >  compData.compMax">(max)</span> de {{currentStep.label}}
       en {{compData.sf * patient.weight | number: '1.0-2'}} ml de solucion fisiologica a pasar
-      en {{compData.goteo.min * patient.weight | number: '1.2-2'}}-{{compData.goteo.max * patient.weight | number: '1.0-2'}} ml/hs
+      en {{compData.goteo.min * patient.weight | number: '1.0-2'}}-{{compData.goteo.max * patient.weight | number: '1.0-2'}} ml/hs
     </p>
   </div>
 
