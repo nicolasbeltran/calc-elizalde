@@ -21,11 +21,8 @@ export class NavbarComponent implements OnInit {
 
   goHome(){
     this.stepService.setStep('home');
-    console.log('this.titleClicks', this.titleClicks);
+    if(this.titleClicks === 6) this.logoName = 'pipo3.jpeg';
 
-    if(this.titleClicks === 6){
-      this.logoName = 'pipo3.jpeg';
-    }
   }
 
   goBack(){
