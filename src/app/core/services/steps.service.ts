@@ -67,7 +67,7 @@ export class StepsService {
         prevStep: 'main-options',
         options: [
           {
-            label: 'Impreganciones',
+            label: 'Impregnaciones',
             key: 'impr-options',
             disabled: false,
           },
@@ -80,12 +80,12 @@ export class StepsService {
       },
       {
         name: 'impr-options',
-        label: 'Impreganciones',
+        label: 'Impregnaciones',
         type: 'options',
         prevStep: 'conv-options',
         options: [
           {
-            label: 'Difenilhidantoina',
+            label: 'Difenilhidantoína',
             key: 'difenil',
             disabled: false,
           },
