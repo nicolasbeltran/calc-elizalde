@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StepsService } from 'src/app/core/services/steps.service';
 import jsonInfo from 'src/app/core/constants/data.json';
 import { PatientService } from 'src/app/core/services/patient.service';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-home',
@@ -10,11 +11,16 @@ import { PatientService } from 'src/app/core/services/patient.service';
 })
 export class HomeComponent implements OnInit {
 
-  patient: Patient = {};
+  name: string;
+  weight: number;
+
   steps: any[];
   currentStep: any;
   jsonInfo = jsonInfo as any [];
   compData: any;
+
+  hipokalemiaMgSRel: string;
+  hipokalemiaMgSMode: string;
 
   constructor(private stepsService: StepsService, private patientService: PatientService) {
     this.steps = this.stepsService.mainSteps;
@@ -24,30 +30,44 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.stepsService.getStep().subscribe(stepName => {
       this.currentStep = this.steps.find(step => step.name === stepName);
-      this.patient = {};
-      this.patientService.setPatient({})
+      if(stepName === 'home'){
+        this.name = ''; this.weight = undefined;
+        this.patientService.setPatient({})
+      }
+    })
+    this.stepsService.goBack$.subscribe(() => {
+      this.currentStep = this.steps.find(step => step.name === this.currentStep.prevStep);
+      if(this.currentStep.name === 'home'){
+        this.name = ''; this.weight = undefined;
+        this.patientService.setPatient({})
+      }
     })
   }
 
-  nextStep(stepName){
-    this.currentStep = this.steps.find(step => step.name === stepName);
-    if(this.currentStep.type === 'result'){
-      console.log('result!');
-
+  nextStep(option){
+    const nextStep = this.steps.find(step => step.name === option.key);
+    if(!nextStep){
+      this.currentStep = { name: option.key, label: option.label, type: 'result', prevStep: this.currentStep.name}
       this.compData = this.jsonInfo.find(comp => comp.name === this.currentStep.name);
-      console.log('this.compData', this.compData);
+    } else {
+      this.currentStep = nextStep;
     }
 
   }
 
   addPatient(){
-    this.patientService.setPatient(this.patient);
+    this.patientService.setPatient({ name: this.name, weight: this.weight});
+  }
 
+  /////////////
+
+  handleHipokalemiaMgS(){
+    if(!this.hipokalemiaMgSMode || !this.hipokalemiaMgSRel) return;
+    this.compData['final'] = {
+      K: this.compData[this.hipokalemiaMgSRel].K,
+      mode: this.compData[this.hipokalemiaMgSRel][this.hipokalemiaMgSMode],
+    }
   }
 
 }
 
-interface Patient {
-  name?: string;
-  weight?: number;
-}

@@ -10,15 +10,27 @@ import { StepsService } from '../../services/steps.service';
 export class NavbarComponent implements OnInit {
 
   patient;
+  titleClicks = 0;
+  logoName = 'elizalde-logo.png';
 
   constructor(private patientService: PatientService, private stepService: StepsService) { }
 
   ngOnInit(): void {
-    this.patientService.getPatient().subscribe(patient => this.patient = patient)
+    this.patientService.getPatient().subscribe(patient => this.patient = patient);
   }
 
   goHome(){
     this.stepService.setStep('home');
+    console.log('this.titleClicks', this.titleClicks);
+
+    if(this.titleClicks === 6){
+      this.logoName = 'pipo3.jpeg';
+    }
+  }
+
+  goBack(){
+    this.stepService.goBack$.next();
+
   }
 
 }

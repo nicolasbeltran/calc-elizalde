@@ -8,6 +8,8 @@ import { FooterComponent } from './core/shell/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepsService } from './core/services/steps.service';
 import { PatientService } from './core/services/patient.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { PatientService } from './core/services/patient.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    NoopAnimationsModule,
+    MatButtonToggleModule,
   ],
   providers: [StepsService, PatientService],
   bootstrap: [AppComponent]

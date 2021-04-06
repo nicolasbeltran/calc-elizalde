@@ -8,5 +8,35 @@
       "min": 1.2,
       "max": 3.6
     }
+  },
+  {
+    "name": "hipokalemia-lm-as",
+    "kaon": {
+      "min": 0.38,
+      "max": 0.92
+    },
+    "ClK1a1": {
+      "min": 0.5,
+      "max": 1.25
+    },
+    "ClK1a3": {
+      "min": 0.17,
+      "max": 0.42
+    },
+    "time": 6,
+    "max-weight": 60
+  },
+  {
+    "name": "hipokalemia-mg-s",
+    "rel1a1":{
+      "K": 1,
+      "perif": 17,
+      "central": 8
+    },
+    "rel1a3":{
+      "K": 1.33,
+      "perif": 17,
+      "central": 8
+    }
   }
 ]

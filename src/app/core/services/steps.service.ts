@@ -7,6 +7,7 @@ import { Observable, Subject } from 'rxjs';
 export class StepsService {
 
   steps$ = new Subject<any>();
+  goBack$ = new Subject<any>();
 
   constructor() { }
 
@@ -27,11 +28,12 @@ export class StepsService {
       {
         name: 'main-options',
         type: 'options',
+        prevStep: 'home',
         options: [
           {
             label: 'Potasio',
             key: 'potasio',
-            disabled: true,
+            disabled: false,
           },
           {
             label: 'Convulsiones',
@@ -41,9 +43,28 @@ export class StepsService {
         ]
       },
       {
+        name: 'potasio',
+        label: 'Potasio',
+        type: 'options',
+        prevStep: 'main-options',
+        options: [
+          {
+            label: 'Hipokalemia leve/moderada asintomática',
+            key: 'hipokalemia-lm-as',
+            disabled: false,
+          },
+          {
+            label: 'Hipokalemia grave/moderada sintomática',
+            key: 'hipokalemia-mg-s',
+            disabled: false,
+          },
+        ]
+      },
+      {
         name: 'conv-options',
         label: 'Convulsiones',
         type: 'options',
+        prevStep: 'main-options',
         options: [
           {
             label: 'Impreganciones',
@@ -61,6 +82,7 @@ export class StepsService {
         name: 'impr-options',
         label: 'Impreganciones',
         type: 'options',
+        prevStep: 'conv-options',
         options: [
           {
             label: 'Difenilhidantoina',
@@ -83,6 +105,7 @@ export class StepsService {
         name: 'benz-options',
         label: 'Benzodiacepinas',
         type: 'options',
+        prevStep: 'conv-options',
         options: [
           {
             label: 'Lorazepam',
@@ -101,11 +124,6 @@ export class StepsService {
           }
         ]
       },
-      {
-        name: 'difenil',
-        label: 'Difenilhidantoina',
-        type: 'result',
-      }
     ]
   }
 }

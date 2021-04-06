@@ -1,8 +1,8 @@
 <nav class="navbar navbar-light">
   <div class="container">
     <a class="navbar-brand" href="#">
-      <img (click)="goHome()" src="./assets/elizalde-logo.png" alt="" width="50" height="50">
-      <span class="ml-3 d-inline-block">Calculadora Elizalde</span>
+      <img (click)="goHome();" src="./assets/{{logoName}}" alt="" width="50" height="50">
+      <span (click)="titleClicks = titleClicks + 1" class="ml-3 d-inline-block">Calculadora Elizalde</span>
     </a>
   </div>
 </nav>
@@ -11,5 +11,6 @@
     <span class="navbar-text text-light">
       {{patient.name}} - {{patient.weight}} Kg
     </span>
+    <img src="./assets/icons/arrow-left.svg" alt="" (click)="goBack()">
   </div>
 </nav>
