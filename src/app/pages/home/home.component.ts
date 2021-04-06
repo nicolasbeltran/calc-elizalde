@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   name: string;
   weight: number;
+  altWeight: number;
 
   steps: any[];
   currentStep: any;
@@ -49,6 +50,7 @@ export class HomeComponent implements OnInit {
     if(!nextStep){
       this.currentStep = { name: option.key, label: option.label, type: 'result', prevStep: this.currentStep.name}
       this.compData = this.jsonInfo.find(comp => comp.name === this.currentStep.name);
+      this.handleResults();
     } else {
       this.currentStep = nextStep;
     }
@@ -61,7 +63,25 @@ export class HomeComponent implements OnInit {
 
   /////////////
 
+  handleResults(){
+    switch (this.currentStep.name) {
+      case 'hipokalemia-lm-as':
+        this.handleHipokalemiaLmAs();
+        break;
+      case 'hipokalemia-mg-s':
+        this.handleHipokalemiaMgS();
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleHipokalemiaLmAs(){
+    this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
+  }
+
   handleHipokalemiaMgS(){
+    this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
     if(!this.hipokalemiaMgSMode || !this.hipokalemiaMgSRel) return;
     this.compData['final'] = {
       K: this.compData[this.hipokalemiaMgSRel].K,

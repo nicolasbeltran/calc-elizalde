@@ -35,29 +35,35 @@
 
     <h4 *ngIf="currentStep.label" class="text-center">{{currentStep.label}}</h4>
 
-    <p  *ngSwitchCase="'difenil'"> Diluir {{(compData.comp * weight) >  compData.compMax ?  compData.compMax : compData.comp * weight | number: '1.0-2' }} ml
-      <span *ngIf="(compData.comp * weight) >  compData.compMax">(max)</span> de {{currentStep.label}}
-      en {{compData.sf * weight | number: '1.0-2'}} ml de solución fisiológica a pasar
-      en {{compData.goteo.min * weight | number: '1.0-2'}} - {{compData.goteo.max * weight | number: '1.0-2'}} ml/hs
-    </p>
+    <div  *ngSwitchCase="'difenil'">
+
+      <h6 *ngIf="(compData.comp * weight) >  compData.compMax" class="badge badge-pill badge-primary my-2">Máximo: {{compData.compMax}} ml</h6>
+
+      <p>
+        Diluir {{(compData.comp * weight) >  compData.compMax ?  compData.compMax : compData.comp * weight | number: '1.0-2' }} ml de {{currentStep.label}}
+        en {{compData.sf * weight | number: '1.0-2'}} ml de solución fisiológica a pasar
+        en {{compData.goteo.min * weight | number: '1.0-2'}} - {{compData.goteo.max * weight | number: '1.0-2'}} ml/hs
+      </p>
+    </div>
 
     <div *ngSwitchCase="'hipokalemia-lm-as'">
+      <h6 *ngIf="weight > compData.maxWeight" class="badge badge-pill badge-primary my-2">Peso máximo: {{altWeight}} Kg</h6>
       <div class="my-2">
         <h5>KAON</h5>
-        <p>{{compData.kaon.min * weight | number: '1.0-2'}} - {{compData.kaon.max * weight | number: '1.0-2'}} ml cada 6 hs</p>
+        <p>{{compData.kaon.min * altWeight | number: '1.0-2'}} - {{compData.kaon.max * altWeight | number: '1.0-2'}} ml cada 6 hs</p>
       </div>
       <div class="my-2">
         <h5>ClK (1=1)</h5>
-        <p>{{compData.ClK1a1.min * weight | number: '1.0-2'}} - {{compData.ClK1a1.max * weight | number: '1.0-2'}} ml cada 6 hs</p>
+        <p>{{compData.ClK1a1.min * altWeight | number: '1.0-2'}} - {{compData.ClK1a1.max * altWeight | number: '1.0-2'}} ml cada 6 hs</p>
       </div>
       <div class="my-2">
         <h5>ClK (1=3)</h5>
-        <p>{{compData.ClK1a3.min * weight | number: '1.0-2'}} - {{compData.ClK1a3.max * weight | number: '1.0-2'}} ml cada 6 hs</p>
+        <p>{{compData.ClK1a3.min * altWeight | number: '1.0-2'}} - {{compData.ClK1a3.max * altWeight | number: '1.0-2'}} ml cada 6 hs</p>
       </div>
     </div>
 
     <div  *ngSwitchCase="'hipokalemia-mg-s'" class="w-100 h-75 flex-col">
-      <!-- Diluir (...) ml de ClK (1=1)/(1=3) en (...) ml de solucion fisiologica, a pasar en (....) ml/hs por via periférica/via central. -->
+      <h6 *ngIf="weight > compData.maxWeight" class="badge badge-pill badge-primary my-2">Peso máximo: {{altWeight}} Kg</h6>
       <div class="d-flex justify-content-center w-100">
         <mat-button-toggle-group [(ngModel)]="hipokalemiaMgSRel" class="mx-2" name="fontStyle" aria-label="Font Style" (change)="handleHipokalemiaMgS()">
           <mat-button-toggle value="rel1a1">1=1</mat-button-toggle>
@@ -72,9 +78,9 @@
 
       <div>
         <p *ngIf="compData.final">
-          Diluir {{compData.final.K * weight | number: '1.0-2'}} ml de ClK
-          en {{compData.final.mode * weight | number: '1.0-2'}} ml de solución fisiológica
-          a pasar en {{(compData.final.K * weight + compData.final.mode * weight) / 2 | number: '1.0-2'}} ml/hs
+          Diluir {{compData.final.K * altWeight | number: '1.0-2'}} ml de ClK
+          en {{compData.final.mode * altWeight | number: '1.0-2'}} ml de solución fisiológica
+          a pasar en {{(compData.final.K * altWeight + compData.final.mode * altWeight) / 2 | number: '1.0-2'}} ml/hs
         </p>
       </div>
     </div>
