@@ -38,21 +38,21 @@
     <p  *ngSwitchCase="'difenil'"> Diluir {{(compData.comp * weight) >  compData.compMax ?  compData.compMax : compData.comp * weight | number: '1.0-2' }} ml
       <span *ngIf="(compData.comp * weight) >  compData.compMax">(max)</span> de {{currentStep.label}}
       en {{compData.sf * weight | number: '1.0-2'}} ml de solución fisiológica a pasar
-      en {{compData.goteo.min * weight | number: '1.0-2'}}-{{compData.goteo.max * weight | number: '1.0-2'}} ml/hs
+      en {{compData.goteo.min * weight | number: '1.0-2'}} - {{compData.goteo.max * weight | number: '1.0-2'}} ml/hs
     </p>
 
     <div *ngSwitchCase="'hipokalemia-lm-as'">
       <div class="my-2">
         <h5>KAON</h5>
-        <p>{{compData.kaon.min * weight | number: '1.0-2'}}-{{compData.kaon.max * weight | number: '1.0-2'}} ml cada 6 hs</p>
+        <p>{{compData.kaon.min * weight | number: '1.0-2'}} - {{compData.kaon.max * weight | number: '1.0-2'}} ml cada 6 hs</p>
       </div>
       <div class="my-2">
         <h5>ClK (1=1)</h5>
-        <p>{{compData.ClK1a1.min * weight | number: '1.0-2'}}-{{compData.ClK1a1.max * weight | number: '1.0-2'}} ml cada 6 hs</p>
+        <p>{{compData.ClK1a1.min * weight | number: '1.0-2'}} - {{compData.ClK1a1.max * weight | number: '1.0-2'}} ml cada 6 hs</p>
       </div>
       <div class="my-2">
         <h5>ClK (1=3)</h5>
-        <p>{{compData.ClK1a3.min * weight | number: '1.0-2'}}-{{compData.ClK1a3.max * weight | number: '1.0-2'}} ml cada 6 hs</p>
+        <p>{{compData.ClK1a3.min * weight | number: '1.0-2'}} - {{compData.ClK1a3.max * weight | number: '1.0-2'}} ml cada 6 hs</p>
       </div>
     </div>
 
