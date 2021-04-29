@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   compData: any;
 
   hipokalemiaMgSRel: string;
-  hipokalemiaMgSMode: string;
+  hipokalemiaMgSVia: string;
 
   constructor(private stepsService: StepsService, private patientService: PatientService) {
     this.steps = this.stepsService.mainSteps;
@@ -65,9 +65,12 @@ export class HomeComponent implements OnInit {
 
   handleResults(){
     switch (this.currentStep.name) {
-      case 'hipokalemia-lm-as':
-        this.handleHipokalemiaLmAs();
-        break;
+      case 'difenil':
+        this.handleDifenil();
+      break;
+      // case 'hipokalemia-lm-as':
+      //   this.handleHipokalemiaLmAs();
+      //   break;
       case 'hipokalemia-mg-s':
         this.handleHipokalemiaMgS();
         break;
@@ -76,17 +79,31 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  handleHipokalemiaLmAs(){
+  handleDifenil(){
     this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
   }
 
+  // handleHipokalemiaLmAs(){
+  //   this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
+  // }
+
   handleHipokalemiaMgS(){
-    this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
-    if(!this.hipokalemiaMgSMode || !this.hipokalemiaMgSRel) return;
-    this.compData['final'] = {
+    // this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
+    if(!this.hipokalemiaMgSVia || !this.hipokalemiaMgSRel) return;
+    this.compData['choice'] = {
       K: this.compData[this.hipokalemiaMgSRel].K,
-      mode: this.compData[this.hipokalemiaMgSRel][this.hipokalemiaMgSMode],
+      via: this.compData[this.hipokalemiaMgSRel][this.hipokalemiaMgSVia],
     }
+    this.compData['result'] = {
+      kMin: this.compData.choice.K.min * this.weight > this.compData.choice.K.maxMeq ? this.compData.choice.K.maxMeq :  this.compData.choice.K.min * this.weight,
+      kMax: this.compData.choice.K.max * this.weight > this.compData.choice.K.maxMeq ? this.compData.choice.K.maxMeq :  this.compData.choice.K.max * this.weight,
+      viaMin: this.compData.choice.via.min * this.weight > this.compData.choice.via.maxMeq ? this.compData.choice.via.maxMeq :  this.compData.choice.via.min * this.weight,
+      viaMax: this.compData.choice.via.max * this.weight > this.compData.choice.via.maxMeq ? this.compData.choice.via.maxMeq :  this.compData.choice.via.max * this.weight,
+      goteo: this.compData.goteo[this.hipokalemiaMgSVia],
+    }
+    console.log('handleHipokalemiaMgS compData', this.compData);
+
+
   }
 
 }
