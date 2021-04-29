@@ -1,15 +1,17 @@
 <nav class="navbar navbar-light">
   <div class="container">
     <a class="navbar-brand">
-      <img (click)="goHome();" src="./assets/{{logoName}}" alt="" width="50" height="50">
-      <span (click)="titleClicks = titleClicks + 1" class="ml-3 d-inline-block">Calculadora Elizalde</span>
+      <img *ngIf="!showImages" (click)="goHome();" src="./assets/elizalde-logo.png" alt="" width="50" height="50">
+      <img *ngIf="showImages"  (click)="goHome();" src="./assets/pipo3.jpeg" alt="" width="50" height="50">
+      <span (click)="titleClick()" class="ml-3 d-inline-block">Calculadora Elizalde</span>
+      <img *ngIf="showImages" src="./assets/patri2.jpeg" class="d-inline-block mx-3" alt="" width="50" height="50">
     </a>
   </div>
 </nav>
 <nav *ngIf="patient?.weight" class="navbar navbar-light bg-dark">
   <div class="container-fluid">
     <span class="navbar-text text-light">
-      {{patient.name}} - {{patient.weight}} Kg
+      {{patient.name ? patient.name + ' - ': '' }}{{patient.weight}} Kg
     </span>
     <img src="./assets/icons/arrow-left.svg" alt="" (click)="goBack()">
   </div>

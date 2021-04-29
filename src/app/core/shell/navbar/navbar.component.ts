@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
 
   patient;
   titleClicks = 0;
-  logoName = 'elizalde-logo.png';
+  showImages = false;
 
   constructor(private patientService: PatientService, private stepService: StepsService) { }
 
@@ -21,8 +21,11 @@ export class NavbarComponent implements OnInit {
 
   goHome(){
     this.stepService.setStep('home');
-    if(this.titleClicks === 6) this.logoName = 'pipo3.jpeg';
+  }
 
+  titleClick(){
+    this.titleClicks = this.titleClicks + 1;
+    this.showImages = this.titleClicks === 3;
   }
 
   goBack(){

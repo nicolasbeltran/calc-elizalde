@@ -48,15 +48,13 @@
     </div>
 
     <ng-container *ngSwitchCase="'hipokalemia-lm-as'">
-      <div class="text-center">
+      <div class="text-center flex-col">
         <h5 class="badge badge-pill badge-primary">Vía oral</h5>
+        <h5 *ngIf="compData.header.min * weight > compData.header.maxMeq" class="badge badge-pill badge-primary">Máximo {{compData.header.maxMeq}} mEq</h5>
         <h5>
           {{compData.header.min * weight > compData.header.maxMeq ? compData.header.maxMeq :  compData.header.min * weight | number: '1.0-2'}} -
           {{compData.header.max * weight > compData.header.maxMeq ? compData.header.maxMeq :  compData.header.max * weight | number: '1.0-2'}} mEq cada 6 hs
         </h5>
-      </div>
-      <div>
-        <h5 *ngIf="compData.header.min * weight > compData.header.maxMeq" class="badge badge-pill badge-primary">Máximo {{compData.header.maxMeq}} mEq</h5>
       </div>
       <div>
         <div class="my-2">
@@ -100,8 +98,6 @@
           {{compData.header.max * weight > compData.header.maxMeq ? compData.header.maxMeq :  compData.header.max * weight | number: '1.0-2'}} mEq / dosis
         </h5>
       </div>
-      <div>
-      </div>
       <div class="d-flex justify-content-center w-100">
         <div class="mx-2">
           <h5 class="text-center">Presentación</h5>
@@ -120,7 +116,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="text-center">
         <p *ngIf="compData.result">
             Diluir  {{compData.result.kMin | number: '1.0-2'}} - {{compData.result.kMax | number: '1.0-2'}} ml de ClK en
                     {{compData.result.viaMin | number: '1.0-2'}} - {{compData.result.viaMax | number: '1.0-2'}} ml de solución fisiológica
