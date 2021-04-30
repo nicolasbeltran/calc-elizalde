@@ -97,9 +97,10 @@
     <div  *ngSwitchCase="'hipokalemia-mg-s'" class="w-100 h-75 flex-col">
       <div class="text-center">
         <h5 *ngIf="compData.header.min * weight > compData.header.maxMeq" class="badge badge-pill badge-primary mb-4">Dosis máxima: {{compData.header.maxMeq}} mEq cada 6hs</h5>
-        <h5>
-          {{compData.header.min * weight > compData.header.maxMeq ? compData.header.maxMeq :  compData.header.min * weight | number: '1.0-2'}} -
-          {{compData.header.max * weight > compData.header.maxMeq ? compData.header.maxMeq :  compData.header.max * weight | number: '1.0-2'}} mEq / dosis
+        <h5 *ngIf="compData.resultHeader">
+          {{compData.resultHeader.headerMin | number: '1.0-2'}}
+          <span *ngIf="compData.resultHeader.headerMin !== compData.resultHeader.headerMax"> - {{compData.resultHeader.headerMax | number: '1.0-2'}}</span>
+          mEq / dosis
         </h5>
       </div>
       <div class="d-flex justify-content-center w-100">

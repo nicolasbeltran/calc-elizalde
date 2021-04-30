@@ -97,7 +97,10 @@ export class HomeComponent implements OnInit {
   }
 
   handleHipokalemiaMgS(){
-    // this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
+    this.compData['resultHeader'] = {
+      headerMin: this.compData.header.min * this.weight > this.compData.header.maxMeq ? this.compData.header.maxMeq :  this.compData.header.min *  this.weight,
+      headerMax: this.compData.header.max * this.weight > this.compData.header.maxMeq ? this.compData.header.maxMeq :  this.compData.header.max *  this.weight,
+    }
     if(!this.hipokalemiaMgSVia || !this.hipokalemiaMgSRel) return;
     this.compData['choice'] = {
       K: this.compData[this.hipokalemiaMgSRel].K,
