@@ -52,8 +52,9 @@
         <h5 class="badge badge-pill badge-primary">Vía oral</h5>
         <h5 *ngIf="compData.header.min * weight > compData.header.maxMeq" class="badge badge-pill badge-primary">Máximo {{compData.header.maxMeq}} mEq</h5>
         <h5>
-          {{compData.header.min * weight > compData.header.maxMeq ? compData.header.maxMeq :  compData.header.min * weight | number: '1.0-2'}} -
-          {{compData.header.max * weight > compData.header.maxMeq ? compData.header.maxMeq :  compData.header.max * weight | number: '1.0-2'}} mEq cada 6 hs
+          {{compData.result.headerMin | number: '1.0-2'}}
+          <span *ngIf="compData.result.headerMin !== compData.result.headerMax"> - {{compData.result.headerMax | number: '1.0-2'}}</span>
+           mEq cada 6 hs
         </h5>
       </div>
       <div>
@@ -63,8 +64,9 @@
             <!-- <h6 *ngIf="compData.kaon.min * weight > compData.kaon.maxMeq" class="text-orange">Máximo</h6> -->
           </div>
           <p>
-            {{compData.kaon.min * weight > compData.kaon.maxMeq ? compData.kaon.maxMeq :  compData.kaon.min * weight | number: '1.0-2'}} -
-            {{compData.kaon.max * weight > compData.kaon.maxMeq ? compData.kaon.maxMeq :  compData.kaon.max * weight | number: '1.0-2'}} ml cada 6 hs
+            {{compData.result.kaonMin | number: '1.0-2'}}
+            <span *ngIf="compData.result.kaonMin !== compData.result.kaonMax"> - {{compData.result.kaonMax | number: '1.0-2'}}</span>
+             ml cada 6 hs
           </p>
         </div>
         <div class="my-2">
@@ -73,8 +75,9 @@
             <!-- <h6 *ngIf="compData.ClK1a1.min * weight > compData.ClK1a1.maxMeq" class="text-orange">Máximo</h6> -->
           </div>
           <p>
-            {{compData.ClK1a1.min * weight > compData.ClK1a1.maxMeq ? compData.ClK1a1.maxMeq :  compData.ClK1a1.min * weight | number: '1.0-2'}} -
-            {{compData.ClK1a1.max * weight > compData.ClK1a1.maxMeq ? compData.ClK1a1.maxMeq :  compData.ClK1a1.max * weight | number: '1.0-2'}} ml cada 6 hs
+            {{compData.result.clK1a1Min | number: '1.0-2'}}
+            <span *ngIf="compData.result.clK1a1Min !== compData.result.clK1a1Max"> - {{compData.result.clK1a1Max | number: '1.0-2'}}</span>
+             ml cada 6 hs
           </p>
         </div>
         <div class="my-2">
@@ -83,8 +86,9 @@
             <!-- <h6 *ngIf="compData.ClK1a3.min * weight > compData.ClK1a3.maxMeq" class="text-orange">Máximo</h6> -->
           </div>
           <p>
-            {{compData.ClK1a3.min * weight > compData.ClK1a3.maxMeq ? compData.ClK1a3.maxMeq :  compData.ClK1a3.min * weight | number: '1.0-2'}} -
-            {{compData.ClK1a3.max * weight > compData.ClK1a3.maxMeq ? compData.ClK1a3.maxMeq :  compData.ClK1a3.max * weight | number: '1.0-2'}} ml cada 6 hs
+            {{compData.result.clK1a3Min | number: '1.0-2'}}
+            <span *ngIf="compData.result.clK1a3Min !== compData.result.clK1a3Max"> - {{compData.result.clK1a3Max | number: '1.0-2'}}</span>
+             ml cada 6 hs
           </p>
         </div>
       </div>
@@ -118,11 +122,22 @@
 
       <div class="text-center">
         <p *ngIf="compData.result">
-            Diluir  {{compData.result.kMin | number: '1.0-2'}} - {{compData.result.kMax | number: '1.0-2'}} ml de ClK en
-                    {{compData.result.viaMin | number: '1.0-2'}} - {{compData.result.viaMax | number: '1.0-2'}} ml de solución fisiológica
-            a pasar en
-                    {{(compData.result.kMin + compData.result.viaMin ) / compData.result.goteo | number: '1.0-2'}} -
-                    {{(compData.result.kMax + compData.result.viaMax ) / compData.result.goteo | number: '1.0-2'}} ml/hs
+
+            Diluir {{compData.result.kMin | number: '1.0-2'}}
+            <span *ngIf="compData.result.kMin !== compData.result.kMax"> - {{compData.result.kMax | number: '1.0-2'}}</span>  ml de ClK en
+
+            {{compData.result.viaMin | number: '1.0-2'}}
+            <span *ngIf="compData.result.viaMin !== compData.result.viaMax"> - {{compData.result.viaMax | number: '1.0-2'}}</span>
+              a pasar en
+
+            {{(compData.result.kMin + compData.result.viaMin ) / compData.result.goteo | number: '1.0-2'}}
+            <span
+            *ngIf="
+            (compData.result.kMin + compData.result.viaMin ) / compData.result.goteo
+              !==
+              (compData.result.kMax + compData.result.viaMax ) / compData.result.goteo">
+              - {{(compData.result.kMax + compData.result.viaMax ) / compData.result.goteo | number: '1.0-2'}}
+            </span> ml/hs
         </p>
       </div>
     </div>

@@ -68,9 +68,9 @@ export class HomeComponent implements OnInit {
       case 'difenil':
         this.handleDifenil();
       break;
-      // case 'hipokalemia-lm-as':
-      //   this.handleHipokalemiaLmAs();
-      //   break;
+      case 'hipokalemia-lm-as':
+        this.handleHipokalemiaLmAs();
+        break;
       case 'hipokalemia-mg-s':
         this.handleHipokalemiaMgS();
         break;
@@ -83,9 +83,18 @@ export class HomeComponent implements OnInit {
     this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
   }
 
-  // handleHipokalemiaLmAs(){
-  //   this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
-  // }
+  handleHipokalemiaLmAs(){
+    this.compData['result'] = {
+      headerMin: this.compData.header.min * this.weight > this.compData.header.maxMeq ? this.compData.header.maxMeq :  this.compData.header.min *  this.weight,
+      headerMax: this.compData.header.max * this.weight > this.compData.header.maxMeq ? this.compData.header.maxMeq :  this.compData.header.max *  this.weight,
+      kaonMin: this.compData.kaon.min * this.weight > this.compData.kaon.maxMeq ? this.compData.kaon.maxMeq :  this.compData.kaon.min *  this.weight,
+      kaonMax: this.compData.kaon.max * this.weight > this.compData.kaon.maxMeq ? this.compData.kaon.maxMeq :  this.compData.kaon.max *  this.weight,
+      clK1a1Min: this.compData.ClK1a1.min * this.weight > this.compData.ClK1a1.maxMeq ? this.compData.ClK1a1.maxMeq :  this.compData.ClK1a1.min *  this.weight,
+      clK1a1Max: this.compData.ClK1a1.max * this.weight > this.compData.ClK1a1.maxMeq ? this.compData.ClK1a1.maxMeq :  this.compData.ClK1a1.max *  this.weight,
+      clK1a3Min: this.compData.ClK1a3.min * this.weight > this.compData.ClK1a3.maxMeq ? this.compData.ClK1a3.maxMeq :  this.compData.ClK1a3.min *  this.weight,
+      clK1a3Max: this.compData.ClK1a3.max * this.weight > this.compData.ClK1a3.maxMeq ? this.compData.ClK1a3.maxMeq :  this.compData.ClK1a3.max *  this.weight,
+    }
+  }
 
   handleHipokalemiaMgS(){
     // this.altWeight = this.weight > this.compData.maxWeight ? this.compData.maxWeight : this.weight;
@@ -101,9 +110,6 @@ export class HomeComponent implements OnInit {
       viaMax: this.compData.choice.via.max * this.weight > this.compData.choice.via.maxMeq ? this.compData.choice.via.maxMeq :  this.compData.choice.via.max * this.weight,
       goteo: this.compData.goteo[this.hipokalemiaMgSVia],
     }
-    console.log('handleHipokalemiaMgS compData', this.compData);
-
-
   }
 
 }
